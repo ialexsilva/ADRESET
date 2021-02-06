@@ -30,7 +30,7 @@ menu
 # Função de desbloqueio de usuário
 function unlockAccount {
 $username = read-host "Nome de usuario"
-$adminCred = Get-Credential -Message  "Você precisar inserir as credenciais para desbloqueio da função de reset de senha."
+$adminCred = Get-Credential -Message  "Você precisar inserir as credenciais para desbloqueio da função de desbloqueio de usuario."
 Enable-ADAccount $username -Server SYSMAP.com.br -Credential $adminCred
 Write-Host "Conta de usuario " $username "desbloqueada" -ForegroundColor Green
 menu
