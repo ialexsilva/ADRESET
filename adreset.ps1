@@ -20,7 +20,7 @@ if (-not (Get-Module ActiveDirectory)){
 } 
 # Função de alteração de senha
 function changePassword {
-$username = read-host 'Nome de usuario:'
+$username = read-host 'Nome de usuario'
 # Get-ADUser $username -Properties * | Format-Table -Property DisplayName, LockedOut, PasswordExpired  -AutoSize
 $pass = ConvertTo-SecureString 'Sysmap*2021' -AsPlainText -Force
 $adminCred = Get-Credential -Message  'Você precisar inserir as credenciais para desbloqueio da função de reset de senha.'
@@ -29,7 +29,7 @@ menu
 }
 # Função de desbloqueio de usuário
 function unlockAccount {
-$username = read-host 'Nome de usuario:'
+$username = read-host 'Nome de usuario'
 $adminCred = Get-Credential -Message  'Você precisar inserir as credenciais para desbloqueio da função de reset de senha.'
 Enable-ADAccount $username -Server SYSMAP.com.br -Credential $adminCred
 menu
