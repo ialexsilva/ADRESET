@@ -16,13 +16,17 @@ $Host.UI.RawUI.WindowSize = $sizeWindow
 
 if (-not (Get-Module ActiveDirectory)){     
  Import-Module ActiveDirectory -ErrorAction Stop
-} 
+}
+# Variaveis globais
+$adminUser = "usuarioAdmin"
+$adminPass = ConvertTo-SecureString "SenhaAdmin" -AsPlainText -Force
+$adminCred = New-Object System.Management.Automation.PSCredential -ArgumentList ($adminUser, $adminPass)
 # Função de alteração de senha
 function changePassword {
 $username = read-host "Nome de usuario"
 # Get-ADUser $username -Properties * | Format-Table -Property DisplayName, LockedOut, PasswordExpired  -AutoSize
 $pass = ConvertTo-SecureString "Set*$(Get-Date -format 'yyyy')" -AsPlainText -Force
-$adminCred = Get-Credential -Message  "Você precisar inserir as credenciais para desbloqueio da função de reset de senha."
+# $adminCred = Get-Credential -Message  "Você precisar inserir as credenciais para desbloqueio da função de reset de senha." -Name 'setuser'
 Set-ADAccountPassword $username -NewPassword $pass -PassThru -Credential $adminCred -Server SYSMAP.com.br
 Write-Host "Reset de senha para " $username " feito. | Senha:" $pass -ForegroundColor Green
 menu
@@ -30,7 +34,6 @@ menu
 # Função de desbloqueio de usuário
 function unlockAccount {
 $username = read-host "Nome de usuario"
-$adminCred = Get-Credential -Message  "Você precisar inserir as credenciais para desbloqueio da função de desbloqueio de usuario."
 Enable-ADAccount $username -Server SYSMAP.com.br -Credential $adminCred
 Write-Host "Conta de usuario " $username "desbloqueada" -ForegroundColor Green
 menu
