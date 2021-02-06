@@ -1,7 +1,23 @@
-if (-not (Get-Module ActiveDirectory)){    
- Import-Module ActiveDirectory -ErrorAction Stop
+# Configura a janela
 
+$host.ui.RawUI.WindowTitle = "Ferramenta de Reset de senhas para SET" 
+$host.ui.RawUI.ForegroundColor = "White"
+
+$width = 62
+$sizeWindow = new-object System.Management.Automation.Host.Size $width,16
+$sizeBuffer = new-object System.Management.Automation.Host.Size $width,9999
+if ($Host.UI.RawUI.WindowSize.width -gt $width) {
+$Host.UI.RawUI.WindowSize = $sizeWindow
+$Host.UI.RawUI.BufferSize = $sizeBuffer
 }
+else {
+$Host.UI.RawUI.BufferSize = $sizeBuffer
+$Host.UI.RawUI.WindowSize = $sizeWindow
+}
+
+if (-not (Get-Module ActiveDirectory)){     
+ Import-Module ActiveDirectory -ErrorAction Stop
+} 
 
 function changePassword {
 $username = read-host 'Nome de usuario:'
