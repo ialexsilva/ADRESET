@@ -5,6 +5,7 @@ if (-not (Get-Module ActiveDirectory)){
 
 function changePassword {
 $username = read-host 'Nome de usuario:'
+# Get-ADUser $username -Properties * | Format-Table -Property DisplayName, LockedOut, PasswordExpired  -AutoSize
 $pass = ConvertTo-SecureString 'Sysmap*2021' -AsPlainText -Force
 $adminCred = Get-Credential -Message  'Você precisar inserir as credenciais para desbloqueio da função de reset de senha.'
 Set-ADAccountPassword $username -NewPassword $pass -PassThru -Credential $adminCred -Server SYSMAP.com.br
