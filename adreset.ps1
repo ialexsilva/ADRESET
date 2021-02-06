@@ -21,7 +21,7 @@ menu
 function menu {
 $stepChoice = read-host "
 1. Reset de Senha
-2. Desbloqueio de usuário
+2. Desbloqueio de usuario
 0. Sair
 "
 switch($stepChoice)
