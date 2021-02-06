@@ -33,7 +33,7 @@ $adminCred = Get-Credential -Message  'Você precisar inserir as credenciais par
 Enable-ADAccount $username -Server SYSMAP.com.br -Credential $adminCred
 menu
 }
-#
+# Menu de opções
 function menu {
 $stepChoice = read-host "
 1. Reset de Senha
