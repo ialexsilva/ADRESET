@@ -1,5 +1,4 @@
 # Configura a janela
-
 $host.ui.RawUI.WindowTitle = "Ferramenta de Reset de senhas para SET" 
 $host.ui.RawUI.ForegroundColor = "White"
 
