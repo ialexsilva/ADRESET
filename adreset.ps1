@@ -18,7 +18,7 @@ $Host.UI.RawUI.WindowSize = $sizeWindow
 if (-not (Get-Module ActiveDirectory)){     
  Import-Module ActiveDirectory -ErrorAction Stop
 } 
-
+# Função de alteração de senha
 function changePassword {
 $username = read-host 'Nome de usuario:'
 # Get-ADUser $username -Properties * | Format-Table -Property DisplayName, LockedOut, PasswordExpired  -AutoSize
@@ -27,7 +27,7 @@ $adminCred = Get-Credential -Message  'Você precisar inserir as credenciais par
 Set-ADAccountPassword $username -NewPassword $pass -PassThru -Credential $adminCred -Server SYSMAP.com.br
 menu
 }
-#
+# Função de desbloqueio de usuário
 function unlockAccount {
 $username = read-host 'Nome de usuario:'
 $adminCred = Get-Credential -Message  'Você precisar inserir as credenciais para desbloqueio da função de reset de senha.'
