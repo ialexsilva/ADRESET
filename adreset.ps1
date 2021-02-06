@@ -1,5 +1,5 @@
 # Configura a janela
-$host.ui.RawUI.WindowTitle = "Ferramenta de Reset de senhas para SET" 
+$host.ui.RawUI.WindowTitle = "Ferramenta de reset de senhas do SET" 
 $host.ui.RawUI.ForegroundColor = "White"
 
 $width = 62
@@ -19,18 +19,18 @@ if (-not (Get-Module ActiveDirectory)){
 } 
 # Função de alteração de senha
 function changePassword {
-$username = read-host 'Nome de usuario'
+$username = read-host "Nome de usuario"
 # Get-ADUser $username -Properties * | Format-Table -Property DisplayName, LockedOut, PasswordExpired  -AutoSize
-$pass = ConvertTo-SecureString 'Sysmap*2021' -AsPlainText -Force
-$adminCred = Get-Credential -Message  'Você precisar inserir as credenciais para desbloqueio da função de reset de senha.'
+$pass = ConvertTo-SecureString "Set*$(Get-Date -format 'yyyy')" -AsPlainText -Force
+$adminCred = Get-Credential -Message  "Você precisar inserir as credenciais para desbloqueio da função de reset de senha."
 Set-ADAccountPassword $username -NewPassword $pass -PassThru -Credential $adminCred -Server SYSMAP.com.br
 Write-Host "Reset de senha para " $username " feito. | Senha:" $pass -ForegroundColor Green
 menu
 }
 # Função de desbloqueio de usuário
 function unlockAccount {
-$username = read-host 'Nome de usuario'
-$adminCred = Get-Credential -Message  'Você precisar inserir as credenciais para desbloqueio da função de reset de senha.'
+$username = read-host "Nome de usuario"
+$adminCred = Get-Credential -Message  "Você precisar inserir as credenciais para desbloqueio da função de reset de senha."
 Enable-ADAccount $username -Server SYSMAP.com.br -Credential $adminCred
 Write-Host "Conta de usuario " $username "desbloqueada" -ForegroundColor Green
 menu
