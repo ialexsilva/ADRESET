@@ -22,6 +22,7 @@ if (-not (Get-Module ActiveDirectory)){
 $adminUser = "usuarioAdmin"
 $adminPass = ConvertTo-SecureString "SenhaAdmin" -AsPlainText -Force
 $adminCred = New-Object System.Management.Automation.PSCredential -ArgumentList ($adminUser, $adminPass)
+$separator = "= = = = = = = = = = = = = = = = = = = = = = = = = = = ="
 
 # Função de alteração de senha
 function changePassword {
@@ -31,7 +32,9 @@ Get-ADUser $uname -Properties * | Format-Table -Property DisplayName, LockedOut,
 $confirmaReset Read-Host "Confirma o reset para usuario acima? [S/N]"
 if ( $confirmaReset -match "[sS]" ) { 
  Set-ADAccountPassword $username -NewPassword $pass -PassThru -Credential $adminCred -Server SYSMAP.com.br
+ Write-Host $separator -ForegroundColor White
  Write-Host "Reset de senha para " $username " feito. | Senha:" "Set*$(Get-Date -format 'yyyy')" -ForegroundColor Green
+ Write-Host $separator -ForegroundColor White
  menu
  }
 else {
@@ -43,7 +46,9 @@ menu
 function unlockAccount {
 $username = read-host "Nome de usuario"
 Enable-ADAccount $username -Server SYSMAP.com.br -Credential $adminCred
+Write-Host $separator -ForegroundColor White
 Write-Host "Conta de usuario " $username "desbloqueada" -ForegroundColor Green
+Write-Host $separator -ForegroundColor White
 menu
 }
 
