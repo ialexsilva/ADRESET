@@ -63,7 +63,7 @@ Digite uma opção"
 switch($stepChoice)
 {
     1{changePassword}
-    2{unclockAccount}
+    2{unlockAccount}
     0{exit}
 
 }
