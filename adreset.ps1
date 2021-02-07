@@ -28,7 +28,7 @@ $separator = "= = = = = = = = = = = = = = = = = = = = = = = = = = = ="
 function changePassword {
 $username = read-host "Nome de usuario"
 $pass = ConvertTo-SecureString "Set*$(Get-Date -format 'yyyy')" -AsPlainText -Force
-Get-ADUser $uname -Properties * | Format-Table -Property DisplayName, LockedOut, PasswordExpired  -AutoSize
+Get-ADUser $username -Properties * | Format-Table -Property DisplayName, LockedOut, PasswordExpired  -AutoSize
 $confirmaReset Read-Host "Confirma o reset para usuario acima? [S/N]"
 if ( $confirmaReset -match "[sS]" ) { 
  Set-ADAccountPassword $username -NewPassword $pass -PassThru -Credential $adminCred -Server SYSMAP.com.br
