@@ -23,7 +23,7 @@ $adminPass = ConvertTo-SecureString "SenhaAdmin" -AsPlainText -Force
 $adminCred = New-Object System.Management.Automation.PSCredential -ArgumentList ($adminUser, $adminPass)
 $rootFolder = "C:\ADRESET"
 # Local da senha criptografada
-$credentialFilePath = "$rootFolder\AES_PASSWORD_FILE.txt"
+$SecurePwdFilePath = "$rootFolder\AES_PASSWORD_FILE.txt"
 # Local do arquivo AES
 $AESKeyFilePath = "$rootFolder\AES_KEY_FILE.key"
 $AESKey = Get-Content $AESKeyFilePath
