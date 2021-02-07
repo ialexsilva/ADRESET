@@ -28,7 +28,15 @@ $separator = "= = = = = = = = = = = = = = = = = = = = = = = = = = = = = ="
 function changePassword {
 $username = read-host "Nome de usuario"
 $pass = ConvertTo-SecureString "Set*$(Get-Date -format 'yyyy')" -AsPlainText -Force
+try {
 Get-ADUser $username -Properties * | Format-Table -Property DisplayName, LockedOut, PasswordExpired  -AutoSize
+}
+catch {
+ Write-Host $separator -ForegroundColor White
+ Write-Host "Não foi possivel encontrar o usuario informado" -ForegroundColor Red
+ Write-Host $separator -ForegroundColor White
+ menu
+}
 $confirmaReset = Read-Host "Confirma o reset para usuario acima? [S/N]"
 if ( $confirmaReset -match "[sS]" ) { 
  Set-ADAccountPassword $username -NewPassword $pass -PassThru -Credential $adminCred -Server SYSMAP.com.br
@@ -45,6 +53,15 @@ menu
 # Função de desbloqueio de usuário
 function unlockAccount {
 $username = read-host "Nome de usuario"
+try {
+Get-ADUser $username -Properties * | Format-Table -Property DisplayName, LockedOut, PasswordExpired  -AutoSize
+}
+catch {
+ Write-Host $separator -ForegroundColor White
+ Write-Host "Não foi possivel encontrar o usuario informado" -ForegroundColor Red
+ Write-Host $separator -ForegroundColor White
+ menu
+}
 Enable-ADAccount $username -Server SYSMAP.com.br -Credential $adminCred
 Write-Host $separator -ForegroundColor White
 Write-Host "Conta de usuario" $username "desbloqueada" -ForegroundColor Green
