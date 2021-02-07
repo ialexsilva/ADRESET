@@ -22,7 +22,7 @@ if (-not (Get-Module ActiveDirectory)){
 $adminUser = "usuarioAdmin"
 $adminPass = ConvertTo-SecureString "SenhaAdmin" -AsPlainText -Force
 $adminCred = New-Object System.Management.Automation.PSCredential -ArgumentList ($adminUser, $adminPass)
-$separator = "= = = = = = = = = = = = = = = = = = = = = = = = = = = ="
+$separator = "= = = = = = = = = = = = = = = = = = = = = = = = = = = = = ="
 
 # Função de alteração de senha
 function changePassword {
