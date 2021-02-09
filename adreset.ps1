@@ -2,7 +2,7 @@
 $host.ui.RawUI.WindowTitle = "Ferramenta de reset de senhas do SET" 
 $host.ui.RawUI.ForegroundColor = "White"
 
-$width = 62
+$width = 60
 $sizeWindow = new-object System.Management.Automation.Host.Size $width,30
 $sizeBuffer = new-object System.Management.Automation.Host.Size $width,9999
 if ($Host.UI.RawUI.WindowSize.width -gt $width) {
