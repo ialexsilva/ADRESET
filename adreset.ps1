@@ -62,11 +62,17 @@ catch {
  Write-Host $separator -ForegroundColor White
  menu
 }
+$confirmaDesbloqueio = Read-Host "Confirma o desbloqueio do usuario acima? [S/N]"
+if ( $confirmaDesbloqueio -match "[sS]" ) {
 Enable-ADAccount $username -Server SYSMAP.com.br -Credential $adminCred
 Write-Host $separator -ForegroundColor White
 Write-Host "Conta de usuario" $username "desbloqueada" -ForegroundColor Green
 Write-Host $separator -ForegroundColor White
 menu
+}
+else {
+menu
+}
 }
 
 # Menu de opções
